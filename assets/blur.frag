@@ -109,10 +109,10 @@ vec4 distort(){
 	vec2 duv = texelSize * vec2(nx, ny);
 
 
-	float amp2 = .4 + .3*frq3;
+	float amp2 = .5 + .3*frq3;
 	float nx2 = amp2*(-.5 + noise(uv/texelSize*.13+31.3414));
 	float ny2 = amp2*(-.5 + noise(uv/texelSize*.13+1891.88314));
-	vec2 duv2 = texelSize * vec2(nx2, ny2) * .32;
+	vec2 duv2 = texelSize * vec2(nx2, ny2) * .39;
 
 	vec4 tex = texture2D(tex0, uv + duv*1.2 + duv2); // middle middle -- the actual texel / pixel
 	
@@ -151,7 +151,7 @@ vec4 salt(){
 	vec4 tex = tex1*2. + 1.0*tex2;
 	tex.a = 1.0;
 
-	tex.rgb *= 0.14;
+	tex.rgb *= 0.5;
 
 	return tex;
 }
@@ -161,7 +161,7 @@ void main() {
 	vec4 d = distort();
 	vec4 b = blur(3.);
 
-	vec4 res = d + (b-d)*pow(.4+ .2*frq4, 1.5) + n*.08;
+	vec4 res = d + (b-d)*pow(.5 + .1*frq4, 1.4) + n*.1 - .1/2.;
 
 	res.r = abs(res.r);
 	if(res.r > 1.0)
@@ -173,12 +173,13 @@ void main() {
 	if(res.b > 1.0)
 		res.b = 1.0-(res.b-1.0);
 
-	res.g *= 1. - (.03*frq5);
-	res.b *= 1. - (.042*frq5);
+	res.g *= 1. - (.04*frq5);
+	res.b *= 1. - (.062*frq5);
 
 	res.rgb *= 0.9; //(0.8 + 0.2*frq6);
 	//res.rgb = 1. - res.rgb;
 
+	res.a = 1.0;
 	gl_FragColor = res;
 	//gl_FragColor = blur();
 }
