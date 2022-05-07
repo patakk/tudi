@@ -161,7 +161,7 @@ void main() {
 	vec4 d = distort();
 	vec4 b = blur(3.);
 
-	vec4 res = d + (b-d)*pow(.5 + .1*frq4, 1.4) + n*.08 - .08/2.;
+	vec4 res = d + (b-d)*pow(.5 + .1*frq4, 1.4) + n*.03 - .03/2.;
 
 	res.r = abs(res.r);
 	if(res.r > 1.0)
