@@ -116,6 +116,7 @@ function tride(){
         var rh = 20 + (1000*noise(k*31.41+1141.51))%20;
         var rd = 20 + (1000*noise(k*31.41+888.231))%20;
 
+        pg.scale(min(width, height)/2000.);
         pg.translate(x, y, z);
         //pg.rotateX(rw);
         //pg.rotateY(-frameCount*0.005);
